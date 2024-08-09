@@ -11,7 +11,17 @@ export class ArrayOps<T> {
 
    symmDifference(): T[] {
 	  // A Δ B = (A \ B) ∪ (B \ A)
-	  return Array<T>();
+	  // A \ B
+	  const opDiff = this.difference();
+
+	  // B \ A
+	  [this.B, this.A] = [this.A, this.B];
+	  const opReverseDiff = this.difference();
+
+	  // (A \ B) ∪ (B \ A)
+	  this.A = opDiff;
+	  this.B = opReverseDiff;
+	  return this.union();
    }
 
    union(): T[] {
